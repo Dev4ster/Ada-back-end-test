@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2016",                                  
+    "module": "commonjs",                                
+    "rootDir": "src",                                  
+    "moduleResolution": "node",                       
+    "baseUrl": ".",     
+    "paths": {
+      "@*": [
+        "src/*"
+      ],
+    },   
+    "plugins": [
+      {
+          "transform": "@zerollup/ts-transform-paths",
+      }
+    ],                    
+    "allowJs": true,                                  
+    "outDir": "dist",                                
+    "esModuleInterop": true,                        
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,                                     
+    "skipLibCheck": true                
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+}

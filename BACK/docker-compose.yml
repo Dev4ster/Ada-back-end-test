@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  mpapi:
+    container_name: card-api-container
+    restart: always
+    image: node:14
+    environment:
+      LOGIN: ${LOGIN}
+      PASSWORD: ${PASSWORD}
+      TOKEN_SECRET: ${TOKEN_SECRET}
+    working_dir: /usr/src/card-api
+    command: bash -c "yarn install --only=prod && yarn start:debug"
+    volumes: 
+      - ./dist/:/usr/src/card-api/dist/
+      - ./package.json:/usr/src/card-api/package.json
+    ports:
+      - 5000:5000
+      - 9222:9222
