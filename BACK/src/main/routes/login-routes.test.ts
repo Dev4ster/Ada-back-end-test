@@ -11,7 +11,7 @@ describe('Login Routes', () => {
         .post('/login')
         .send({
           login: process.env.LOGIN,
-          password: process.env.PASSWORD
+          senha: process.env.PASSWORD
         })
         .expect(200)
     })
@@ -21,7 +21,7 @@ describe('Login Routes', () => {
         .post('/login')
         .send({
           login: 'victormenezes35@gmail.com',
-          password: 'teste'
+          senha: 'teste'
         })
         .expect(401)
     })

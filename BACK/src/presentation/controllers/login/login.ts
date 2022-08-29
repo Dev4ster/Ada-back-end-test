@@ -15,13 +15,13 @@ import {
 export class LoginController implements Controller {
   constructor(private readonly authentication: Authentication) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { login, password } = httpRequest.body
+    const { login, senha } = httpRequest.body
     if (!login) {
       return new Promise((resolve) =>
         resolve(badRequest(new MissingParamError('login')))
       )
     }
-    if (!password) {
+    if (!senha) {
       return new Promise((resolve) =>
         resolve(badRequest(new MissingParamError('password')))
       )
@@ -29,16 +29,15 @@ export class LoginController implements Controller {
 
     try {
       const token = await this.authentication.auth({
-        password,
+        password: senha,
         login
       })
       if (token instanceof UnauthorizedError) {
         return unauthorized()
       }
 
-      return new Promise((resolve) => resolve(ok({ accessToken: token })))
+      return new Promise((resolve) => resolve(ok(token)))
     } catch (error) {
-      console.log('login', error)
       return serverError(new Error())
     }
   }

@@ -35,7 +35,7 @@ describe('LoginController', () => {
 
     const httpRequest = {
       body: {
-        password: 'any_password'
+        senha: 'any_password'
       }
     }
 
@@ -64,7 +64,7 @@ describe('LoginController', () => {
     const httpRequest = {
       body: {
         login: 'any_email@mail.com',
-        password: 'any_password'
+        senha: 'any_password'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
@@ -80,7 +80,7 @@ describe('LoginController', () => {
     const httpRequest = {
       body: {
         login: 'any_login',
-        password: 'any_password'
+        senha: 'any_password'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
@@ -94,15 +94,11 @@ describe('LoginController', () => {
     const httpRequest = {
       body: {
         login: 'any_login',
-        password: 'any_password'
+        senha: 'any_password'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
 
-    expect(httpResponse).toEqual(
-      ok({
-        accessToken: 'token_valid'
-      })
-    )
+    expect(httpResponse).toEqual(ok('token_valid'))
   })
 })

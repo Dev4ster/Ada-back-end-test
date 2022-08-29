@@ -3,7 +3,7 @@ import env from './config/env'
 
 const runApp = async () => {
   const app = (await import('./config/app')).default
-  app.listen(env.port, () => console.log('server run', env))
+  app.listen(env.port, () => console.log(`server run on port ${env.port} 🚀`))
 }
 
 runApp()

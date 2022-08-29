@@ -6,9 +6,13 @@ import {
 } from './delete-card-protocols'
 import { badRequest, notFound, ok, serverError } from '@presentation/helpers'
 import { InvalidParamError, MissingParamError } from '@presentation/errors'
+import { GetCards } from '../get-cards/get-cards-protocols'
 
 export class DeleteCardController implements Controller {
-  constructor(private readonly deleteCard: DeleteCard) {}
+  constructor(
+    private readonly deleteCard: DeleteCard,
+    private readonly getCards: GetCards
+  ) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const requestParams = httpRequest.params
 
@@ -17,12 +21,13 @@ export class DeleteCardController implements Controller {
     }
 
     try {
-      const card = await this.deleteCard.delete(requestParams.id)
+      const cardDelete = await this.deleteCard.delete(requestParams.id)
 
-      if (!card)
+      if (!cardDelete)
         return notFound(new InvalidParamError('cardId does not exists'))
 
-      return ok({ deleted: card })
+      const remainCards = await this.getCards.getAll()
+      return ok(remainCards)
     } catch (error) {
       return serverError(new Error())
     }

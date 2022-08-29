@@ -3,6 +3,8 @@ import { DeleteCardController } from '.'
 import { badRequest, serverError } from '@presentation/helpers'
 import { InvalidParamError, MissingParamError } from '@presentation/errors'
 import { DeleteCard, Controller } from './delete-card-protocols'
+import { GetCards } from '../get-cards/get-cards-protocols'
+import { Card } from '@domain/models/card'
 
 type SutType = {
   sut: Controller
@@ -13,6 +15,24 @@ const fakeHttpRequest = {
   params: {
     id: 'any_id'
   }
+}
+
+const mockItems = [
+  {
+    conteudo: 'any_conteudo',
+    id: 'any_id',
+    lista: 'any_lista',
+    titulo: 'any_titulo'
+  }
+]
+
+const makeGetCardsStub = (): GetCards => {
+  class GetCardsStub implements GetCards {
+    async getAll() {
+      return mockItems as Card[]
+    }
+  }
+  return new GetCardsStub()
 }
 
 const makeDeleteCardStub = (): DeleteCard => {
@@ -27,7 +47,8 @@ const makeDeleteCardStub = (): DeleteCard => {
 
 const makeSut = (): SutType => {
   const deleteCardStub = makeDeleteCardStub()
-  const sut = new DeleteCardController(deleteCardStub)
+  const getCardsStub = makeGetCardsStub()
+  const sut = new DeleteCardController(deleteCardStub, getCardsStub)
   return { sut, deleteCardStub }
 }
 
@@ -60,6 +81,6 @@ describe('UpdateCardController', () => {
   it('should return cardUpdated if CardUpdate has success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(fakeHttpRequest)
-    expect(httpResponse).toEqual(ok({ deleted: true }))
+    expect(httpResponse).toEqual(ok(mockItems))
   })
 })

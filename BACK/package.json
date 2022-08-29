@@ -5,7 +5,7 @@
   "author": "Victor Menezes <victormenezes35@hotmail.comm>",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky install",
+    "prepare:old": "husky install",
     "build": "rimraf dist && yarn babel src --extensions \".js,.ts\" --out-dir dist --copy-files --ignore \"**/*.spec.ts\" --ignore \"**/*.test.ts\" --no-copy-ignored",
     "start": "node dist/main/server.js",
     "start:debug": "nodemon --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",

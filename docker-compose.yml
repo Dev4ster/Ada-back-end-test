@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  back:
+    build: ./BACK
+    env_file: .env
+    restart: always
+    environment:
+      LOGIN: ${LOGIN}
+      PASSWORD: ${PASSWORD}
+      TOKEN_SECRET: ${TOKEN_SECRET}
+    command: bash -c "yarn start"
+    ports:
+      - 5000:5000
+      - 9222:9222
+
+  front:
+    build: ./FRONT
+    env_file: .env
+    restart: always
+    command: bash -c "yarn start"
+    ports:
+      - 3000:3000

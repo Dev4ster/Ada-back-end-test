@@ -14,16 +14,16 @@ export const setupDB = () => {
     `,
       (err: Error) => {
         if (err) {
-          console.log('Some Error Occured')
+          console.log('Some error occurred on create table')
         } else {
-          console.log('Table Created')
+          console.log('Table created 🚀')
         }
       }
     )
 
     const stmt = db.prepare('INSERT INTO cards VALUES (?, ?, ?, ?)')
     for (let i = 0; i < 10; i++) {
-      stmt.run([uuidv4(), `titulo ${i}`, `conteudo ${i}`, `lista ${i}`])
+      stmt.run([uuidv4(), `titulo ${i}`, `conteudo ${i}`, `ToDo`])
     }
     stmt.finalize()
   })
