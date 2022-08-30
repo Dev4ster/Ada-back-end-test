@@ -4,7 +4,7 @@ Olá este arquivo vai conter algumas instruções do projeto do lado do back-end
 
 ## Rodar o projeto na raiz
 
-Para iniciar o projeto basta clonar e rodar o docker compose na raiz `docker-compose up -d`, caso queira iniciar só o back-end entre na pasta do back-end e rode:
+Para iniciar o projeto basta clonar e rodar o docker compose na raiz `docker-compose up -d`.
 
 é necessário existir um .env na raiz do projeto, com essas variáveis:
 
