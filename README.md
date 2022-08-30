@@ -32,6 +32,10 @@ cd BACK && docker-compose up -d
 - yarn 1.22.x
 - docker & docker-compose any version
 
+## Acesso
+- O front end pode ser acessado no localhost:3000
+- o back end pode ser acessado na localhost:5000
+
 ## Scripts
 
 - `yarn prepare` usado pelo husky para provisionar seus arquivos sh.
